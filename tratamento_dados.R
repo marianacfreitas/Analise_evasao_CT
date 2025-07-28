@@ -16,12 +16,12 @@ dados_aux <- read_delim("CienciaDaComputacaoCT_com_cripto.csv",
   select(-c(id_curso_aluno, cod_curso, nome_unidade, nome_docente,
             matr_cripto, nome_cripto, cod_disciplina, titulacao_docente, 
             sigla_situacao, situacao_item, sigla_semestre, cod_forma_evasao,
-            ))
+            crn))
 
 ########### Organizando informações do aluno
 
 dados_alunos <- dados_aux |>
-  select(id_aluno, forma_evasao, ano_evasao, cra, crn, semestre_evasao, ano_ingresso,
+  select(id_aluno, forma_evasao, ano_evasao, cra, semestre_evasao, ano_ingresso,
          forma_ingresso, cotista) |>
   distinct() |>
   mutate(status = ifelse(forma_evasao == "'Sem evasão'", 0, 1),
@@ -80,7 +80,7 @@ dados_indicadores <- dados_completos |>
   distinct(id_aluno, nome_disciplina, feita) |>
   mutate(nome_coluna = paste0("fez", nome_disciplina)) |>
   select(id_aluno, nome_coluna, feita) |>
-  pivot_wider(names_from = nome_coluna, values_from = feita, values_fill = NA)
+  pivot_wider(names_from = nome_coluna, values_from = feita, values_fill = "não")
 
 # Indica quantas vezes cada aluno fez cada disciplina
 dados_tentativas <- dados_completos |>
@@ -95,8 +95,12 @@ dados_tentativas <- dados_completos |>
 dados_final <- dados_alunos |>
   left_join(dados_indicadores, by = "id_aluno") |>
   left_join(dados_medias, by = "id_aluno") |>
-  left_join(dados_tentativas, by = "id_aluno")
-
+  left_join(dados_tentativas, by = "id_aluno") |>
+  mutate(
+    forma_ingresso = ifelse(id_aluno %in% c(594, 679, 848, 898),
+                            "'Sisu/Reopção de curso'", forma_ingresso)
+  ) |>
+  distinct()
 
 write.csv(dados_final, "dados_tratados.csv")
 
