@@ -7,7 +7,7 @@ library(stringr)
 
 dados_aux <- read_delim("CienciaDaComputacaoCT_com_cripto.csv", 
                     delim = ";", escape_double = FALSE, trim_ws = TRUE,
-                    , locale = locale(encoding = "Latin1")) |>
+                     locale = locale(encoding = "Latin1")) |>
   clean_names() |>
   filter(!is.na(id_curso_aluno)) |>
   group_by(nome_cripto, matr_cripto) |>
@@ -80,7 +80,7 @@ dados_indicadores <- dados_completos |>
   distinct(id_aluno, nome_disciplina, feita) |>
   mutate(nome_coluna = paste0("fez", nome_disciplina)) |>
   select(id_aluno, nome_coluna, feita) |>
-  pivot_wider(names_from = nome_coluna, values_from = feita, values_fill = 0)
+  pivot_wider(names_from = nome_coluna, values_from = feita, values_fill = NA)
 
 # Indica quantas vezes cada aluno fez cada disciplina
 dados_tentativas <- dados_completos |>
