@@ -1,0 +1,11 @@
+EXPLICANDO DADOS TRATADOS:
+Cada linha corresponde a um aluno, contendo informações sobre ingresso e egresso do aluno, disciplinas feitas, média das disciplinas feitas, quantidade de vezes que fez a disciplina.
+
+INFORMAÇÕES SOBRE VARIÁVEIS CRIADAS:
+anos_ate_evasao: indica o número de anos até evasão
+status: 1 indica se houve evasão (desligamente, formou...), 1 indica que não houve evasão (aluno ainda no curso)
+Variáveis sobre as disciplinas:
+Variáveis da forma "numero_tentativas_programacao_ii" indica o número de vezes que o aluno fez a disciplina, nesse caso Programação II.
+Já na forma "media_final_programacao_web_1" indica a média da primeira vez que fez Programação web I.
+Atenção!! Números romanos são nomes das disciplinas, algarismos indica o número de tentativa de fazer a disciplina.
+Variáveis como "fez_banco_de_dados_i" indica se o aluno fez ou não a disciplina Banco de Dados I.
