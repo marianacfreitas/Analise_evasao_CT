@@ -219,6 +219,9 @@ cindex_svm_add <- concordance(Surv(teste$anos_ate_evasao, teste$status) ~
 
 Ao final, o C-índex obtido para o modelo foi de aproximadamente 0.73, indicando bom poder preditivo dos tempos de permanência dos alunos no curso.
 
+## Modelagem para classificação de evasão
+
+
 # Conclusão
 
 
